@@ -8,7 +8,6 @@ namespace Core.Model {
     public class GameModel : MonoBehaviour {
         public World World { get; } = new();
         private readonly GameLoop _gameLoop = new();
-        private readonly SaveController _saveController = new SaveController();
         
         public void Init() {
             _gameLoop.AddUpdateable(World);
@@ -28,9 +27,6 @@ namespace Core.Model {
 
         private void Update() {
             _gameLoop.Update(Time.deltaTime);
-            if (UnityEngine.Input.GetKeyDown(KeyCode.H)) {
-                _saveController.Save(this);
-            }
         }
     }
 }
