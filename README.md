@@ -8,7 +8,7 @@ It's a small game prototype, based on my [custom ECS library](https://github.com
 1. The game is based on grid of configurable size. 
 2. Each cell of the grid has a certain configurable "depth" (which is drawn in game as colored numbers on the cells).
 3. Player can "dig" any cell in the grid.
-4. When player digs the cell, he reduces his dig attempts and decreases the "depth" of cell. If depth of cell goes to zero, it becomes unavailable for digging. If player has no available digs left, he loses.
+4. When player digs the cell, he reduces his dig attempts (Displayed as "Remaining shovels" in UI) and decreases the "depth" of cell. If depth of cell goes to zero, it becomes unavailable for digging. If player has no available digs left, he loses.
 5. When player digs the cell, with a configurable chance a gold bar is spawned (yellow rectangles in the video above).
 6. When player drags the golden bar to the "bag" (brown-ish square in the bottom left), player collects the golden bar.
 7. Once a certain configurable amount of golden bars is collected, player wins.
