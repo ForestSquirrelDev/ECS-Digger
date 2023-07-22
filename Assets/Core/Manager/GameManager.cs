@@ -29,8 +29,8 @@ namespace Core.Manager {
         }
 
         private void Restart() {
-            var scene = SceneManager.GetActiveScene(); 
-            SceneManager.LoadScene(scene.name);
+            _view.Dispose();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

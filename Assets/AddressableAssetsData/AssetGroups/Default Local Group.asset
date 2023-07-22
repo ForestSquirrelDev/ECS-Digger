@@ -37,6 +37,10 @@ MonoBehaviour:
     m_Address: DefaultGoldBarPrefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 044359493237ba94dadae999fbc5f101
+    m_Address: DefaultPeriodicSaveHandlerConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d32738d8e0af3bc45ba50d53729a648b, type: 2}
   m_SchemaSet:

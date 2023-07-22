@@ -28,6 +28,7 @@ namespace Core.View.Grid {
             FitGridLayoutToCellsCount(_container.GridLayoutGroup, gridSize);
             
             Attach(_cellViews);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_container.CellsRoot);
         }
 
         public void OnUpdate() {
@@ -41,9 +42,6 @@ namespace Core.View.Grid {
 
         public void Dispose() {
             Detach(_cellViews);
-            foreach (var cell in _cellViews) {
-                Object.Destroy(cell);
-            }
         }
         
         private void UpdateCells(GridCellEntity[,] gridCells, GridCellViewController[,] cellViews) {

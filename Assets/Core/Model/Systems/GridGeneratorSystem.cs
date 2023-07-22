@@ -18,26 +18,22 @@ namespace Core.Model.Systems {
             var gridConfig = LoadGridConfig(AddressablesConsts.DefaultGridConfig);
             InitGrid(_context.World, gridConfig);
         }
-        
-        public void Restore(Dictionary<string, object> cellsNode) {
-            
-        }
 
         private void InitGrid(World world, GridConfig gridConfig) {
-            var gridCellsComponent = BuildGridCells(gridConfig, world);
+            var gridCellsComponent = BuildGridCells(gridConfig);
             var gridEntity = world.CreateEntity<GridEntity>();
             gridEntity.SetComponent(new GridSizeComponent(gridConfig.Size));
             gridEntity.SetComponent(gridCellsComponent);
         }
 
-        private GridCellsComponent BuildGridCells(GridConfig gridConfig, World world) {
+        private GridCellsComponent BuildGridCells(GridConfig gridConfig) {
             var gridSize = gridConfig.Size;
             var maxDepth = gridConfig.CellDepth;
             
             var gridCells = new GridCellEntity[gridSize.x, gridSize.y];
             for (int x = 0; x < gridSize.x; x++) {
                 for (int y = 0; y < gridSize.y; y++) {
-                    gridCells[x, y] = BuildCellEntity(world, maxDepth, x, y);
+                    gridCells[x, y] = BuildCellEntity(maxDepth, x, y);
                 }
             }
             var gridCellsComponent = new GridCellsComponent(gridCells, gridSize);
@@ -45,8 +41,8 @@ namespace Core.Model.Systems {
             return gridCellsComponent;
         }
 
-        private GridCellEntity BuildCellEntity(World world, int maxDepth, int x, int y) {
-            var cell = world.CreateEntity<GridCellEntity>();
+        private GridCellEntity BuildCellEntity(int maxDepth, int x, int y) {
+            var cell = new GridCellEntity();
             cell.SetComponent(new CellPositionComponent(new Vector2Int(x, y)));
             cell.SetComponent(new CellAvailableDigsComponent(maxDepth));
             cell.SetComponent(new MaxDigsComponent(maxDepth));

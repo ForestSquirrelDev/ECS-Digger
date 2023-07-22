@@ -3,7 +3,8 @@ namespace Core.Utils {
         public const string DefaultGridConfig = "DefaultGridConfig";
         public const string DefaultPlayerConfig = "DefaultPlayerConfig";
         public const string DefaultGoldBarsConfig = "DefaultGoldBarsConfig";
-
+        public const string DefaultPeriodicSaveHandlerConfig = "DefaultPeriodicSaveHandlerConfig";
+        
         public const string CellPrefab = "DefaultCellPrefab";
         public const string GoldBarPrefab = "DefaultGoldBarPrefab";
     }

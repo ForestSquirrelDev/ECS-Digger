@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Input;
-using Core.Model;
 using Core.Model.Components;
 using Core.Model.Entities.RuntimeCreated;
 using Core.Model.Entities.SingletonEntities;
@@ -27,14 +25,13 @@ namespace Core.View.Grid {
             _cellsViewController = cellsViewController;
         }
 
-        public void OnUpdate() {
+        public void OnLateUpdate() {
             SpawnGoldBarsIfNeeded(_world, _goldBarViewControllers, _cellsViewController);
         }
 
         public void Dispose() {
             foreach (var goldBar in _goldBarViewControllers) {
                 goldBar.view.DragEnded -= OnBarDragEnded;
-                Object.Destroy(goldBar.view);
             }
             _goldBarViewControllers.Clear();
         }

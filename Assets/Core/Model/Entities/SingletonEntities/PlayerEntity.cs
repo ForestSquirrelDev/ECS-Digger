@@ -16,7 +16,7 @@ namespace Core.Model.Entities.SingletonEntities {
         }
 
         public void Deserialize(Dictionary<string, object> saveJson) {
-            var entityNode = saveJson.GetNode("player_entity");
+            var entityNode = saveJson.TryGetNode("player_entity");
             foreach (var component in _components.Values) {
                 if (component is not ISerializable serializable)
                     continue;

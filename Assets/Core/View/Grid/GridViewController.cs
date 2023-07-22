@@ -16,7 +16,10 @@ namespace Core.View.Grid {
 
         public void OnUpdate() {
             _cellsViewController.OnUpdate();
-            _goldBarsViewController.OnUpdate();
+        }
+
+        public void OnLateUpdate() {
+            _goldBarsViewController.OnLateUpdate();
         }
 
         public void Dispose() {

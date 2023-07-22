@@ -7,7 +7,7 @@ namespace Core.Model.Entities {
         public void Serialize(Dictionary<string, object> entityNode) {
             foreach (var component in _components.Values) {
                 if (component is not ISerializable serializable)
-                    return;
+                    continue;
                 serializable.Serialize(entityNode);
             }
         }
@@ -15,7 +15,7 @@ namespace Core.Model.Entities {
         public void Deserialize(Dictionary<string, object> entityNode) {
             foreach (var component in _components.Values) {
                 if (component is not ISerializable serializable)
-                    return;
+                    continue;
                 serializable.Deserialize(entityNode);
             }
         }

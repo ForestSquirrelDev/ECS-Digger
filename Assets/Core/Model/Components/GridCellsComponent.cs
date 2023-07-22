@@ -20,7 +20,7 @@ namespace Core.Model.Components {
                     var cellNode = new Dictionary<string, object>();
                     var cell = GridCells[x, y];
                     cell.Serialize(cellNode);
-                    json[$"cell_{x}_{y}"] = cell;
+                    json[$"cell_{x}_{y}"] = cellNode;
                 }
             }
         }
@@ -28,7 +28,7 @@ namespace Core.Model.Components {
         public void Deserialize(Dictionary<string, object> json) {
             for (int x = 0; x < GridCells.GetLength(0); x++) {
                 for (int y = 0; y < GridCells.GetLength(1); y++) {
-                    var cellNode = json.GetNode($"cell_{x}_{y}");
+                    var cellNode = json.TryGetNode($"cell_{x}_{y}");
                     var cell = GridCells[x, y];
                     cell.Deserialize(cellNode);
                 }

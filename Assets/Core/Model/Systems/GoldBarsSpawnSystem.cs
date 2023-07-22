@@ -1,19 +1,29 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Core.Model.Components;
 using Core.Model.Configs;
 using Core.Model.Entities;
 using Core.Model.Entities.RuntimeCreated;
 using Core.Utils;
+using PoorMansECS;
 using PoorMansECS.Systems;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Random = System.Random;
 
 namespace Core.Model.Systems {
-    public class GoldBarsSpawnSystem : SystemBase {
+    public class GoldBarsSpawnSystem : SystemBase, ILoadHandlerSystem {
         private readonly Random _random;
         private GoldBarsConfig _config;
 
         public GoldBarsSpawnSystem(SystemsContext context) : base(context) {
             _random = new Random();
+        }
+        
+        public void Load(Dictionary<string, object> json) {
+            var goldBars = json.GetOrCreateNodeList("gold_bars");
+            foreach (var _ in goldBars) {
+                CreateGoldBar(new Vector2Int(0, 0), _context.World);
+            }
         }
 
         protected override void OnStart() {
@@ -21,7 +31,7 @@ namespace Core.Model.Systems {
         }
 
         protected override void OnUpdate(float delta) {
-            var cells = _context.World.Entities.GetAll<GridCellEntity>();
+            var cells = _context.World.Entities.GetFirst<GridEntity>().GetComponent<GridCellsComponent>().GridCells;
             foreach (var cell in cells) {
                 if (!cell.HasComponent<Tag_RecentlyDiggedCell>()) 
                     continue;
@@ -32,18 +42,17 @@ namespace Core.Model.Systems {
                     cell.RemoveComponent<Tag_RecentlyDiggedCell>();
                     continue;
                 }
-                
-                var goldBar = _context.World.CreateEntity<GoldBarEntity>();
-                var cellPosition = cell.GetComponent<CellPositionComponent>().GridSpacePosition;
-                goldBar.SetComponent(new GoldBarPositionComponent(cellPosition));
+                CreateGoldBar(cell.GetComponent<CellPositionComponent>().GridSpacePosition, _context.World);
                 cell.RemoveComponent<Tag_RecentlyDiggedCell>();
             }
         }
         
-        private GoldBarsConfig LoadGoldBarsConfig(string path) {
-            return Addressables.LoadAssetAsync<GoldBarsConfig>(path).WaitForCompletion();
+        private void CreateGoldBar(Vector2Int position, World world) {
+            var goldBar = world.CreateEntity<GoldBarEntity>();
+            var gridPosition = position;
+            goldBar.SetComponent(new GoldBarPositionComponent(position));
         }
-        
+
         protected override void OnStop() { }
     }
 }

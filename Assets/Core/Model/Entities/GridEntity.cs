@@ -16,11 +16,10 @@ namespace Core.Model.Entities {
         }
 
         public void Deserialize(Dictionary<string, object> saveJson) {
-            var entityNode = saveJson.GetNode("grid_entity");
+            var entityNode = saveJson.TryGetNode("grid_entity");
             foreach (var component in _components.Values) {
-                if (component is not ISerializable serializable)
-                    continue;
-                serializable.Deserialize(entityNode);
+                if (component is ISerializable serializable)
+                    serializable.Deserialize(entityNode);
             }
         }
     }

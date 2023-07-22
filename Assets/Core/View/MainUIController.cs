@@ -1,3 +1,4 @@
+using System;
 using Core.Model;
 using Core.View.Grid;
 using UnityEngine;
@@ -27,6 +28,10 @@ namespace Core.View {
             _shovelsCounter.OnUpdate();
             _goldBarsCounter.Update();
             _endGameUIController.Update();
+        }
+
+        private void LateUpdate() {
+            _gridView.OnLateUpdate();
         }
 
         public void Dispose() {
