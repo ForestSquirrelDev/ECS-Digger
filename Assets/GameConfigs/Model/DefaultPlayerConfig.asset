@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edaf9eb1bf938464ebf9b2b4abebb449, type: 3}
   m_Name: DefaultPlayerConfig
   m_EditorClassIdentifier: 
-  InitialShovels: 10
+  InitialShovels: 15
   MaxGoldBars: 3

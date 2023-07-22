@@ -23,6 +23,7 @@ namespace Core.Model.Entities.RuntimeCreated {
                 if (component is ISerializable serializable)
                     serializable.Deserialize(anyGoldBarNode);
             }
+            goldBarsList.Remove(anyGoldBarNode);
         }
     }
 }
